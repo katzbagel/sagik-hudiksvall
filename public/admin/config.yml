@@ -14,8 +14,8 @@ backend:
 local_backend: true
 
 locale: sv
-site_url: https://sagikhudiksvall.netlify.app
-display_url: https://sagikhudiksvall.netlify.app
+site_url: https://sagik-hudiksvall.pages.dev
+display_url: https://sagik-hudiksvall.pages.dev
 logo_url: /favicon.svg
 
 media_folder: public/bilder/uppladdat

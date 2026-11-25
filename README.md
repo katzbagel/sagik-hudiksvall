@@ -20,20 +20,25 @@ Webbplatsen för SAgiK Hudiksvall, byggd med [Astro](https://astro.build) och me
 
 Gamla WordPress-adresser (`/tavling/`, `/kurser-och-traningar/`) skickas vidare via `public/_redirects`.
 
-## Publicera på Netlify (en gång)
+## Publicering (Cloudflare Pages)
 
-1. **Netlify → Add new project → Import an existing project → GitHub**, välj `sagik-hudiksvall`. Inställningarna läses från `netlify.toml`, klicka bara **Deploy**.
-2. **Project configuration → Change project name**: döp till `sagikhudiksvall` (då blir adressen `sagikhudiksvall.netlify.app`, som redan står i `public/admin/config.yml` och `astro.config.mjs`). Väljer du ett annat namn, ändra de två filerna.
-3. **Inloggning till /admin (GitHub OAuth):**
-   1. GitHub → **Settings → Developer settings → OAuth Apps → New OAuth App**
-      - Application name: `SAgiK Hudiksvall CMS`
-      - Homepage URL: `https://sagikhudiksvall.netlify.app`
-      - Authorization callback URL: `https://api.netlify.com/auth/done`
-   2. Skapa, klicka **Generate a new client secret** och kopiera Client ID + Client secret.
-   3. Netlify → projektet → **Project configuration → Access & security → OAuth → Install provider → GitHub**, klistra in båda.
-4. Öppna `https://sagikhudiksvall.netlify.app/admin` och logga in med GitHub.
+Sajten byggs och publiceras automatiskt av Cloudflare Pages vid varje ändring i `main`.
 
-Egen domän (t.ex. sagikhudiksvall.se) läggs till under **Domain management** i Netlify. Uppdatera då `site` i `astro.config.mjs` och `site_url` i `public/admin/config.yml`.
+1. **Cloudflare → Workers & Pages → Create → Pages → Import an existing Git repository**, välj `sagik-hudiksvall`.
+2. Projektnamn `sagik-hudiksvall`, framework preset **Astro** (build `npm run build`, output `dist`). Node-version styrs av `.node-version`.
+3. Adressen blir `https://sagik-hudiksvall.pages.dev`, som står i `astro.config.mjs` och `public/admin/config.yml`. Byter ni adress, ändra de två filerna.
+
+Gamla WordPress-adresser skickas vidare via `public/_redirects`.
+
+## Inloggning till /admin (DecapBridge)
+
+Redaktörer loggar in med e-post och lösenord (eller Google) via [DecapBridge](https://decapbridge-web.pages.dev).
+
+1. Skapa konto på DecapBridge och välj **Add site**: GitHub, repo `katzbagel/sagik-hudiksvall`, en fine-grained GitHub-token med **Contents: Read and write** för bara det här repot, och login URL `https://sagik-hudiksvall.pages.dev/admin/index.html`.
+2. Kopiera `backend:`-delen från den genererade config.yml till `public/admin/config.yml`.
+3. Bjud in redaktörer under **Manage collaborators**.
+
+Egen domän (t.ex. sagikhudiksvall.se) läggs till under **Custom domains** i Cloudflare Pages. Uppdatera då `site` i `astro.config.mjs`, `site_url` i `public/admin/config.yml` och login URL i DecapBridge.
 
 ## Utveckla lokalt
 
