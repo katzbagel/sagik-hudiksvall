@@ -12,8 +12,8 @@ const nytt = (await nyheter()).slice(0, 4);
 <Bas>
   <section class="hjalte" style={s.startbild ? `--bild: url('${s.startbild}')` : undefined}>
     <div class="inre hjalte-inre">
-      <p class="hjalte-etikett"><Ikon namn="tass" storlek={16} /> {s.sedan ? `Sedan ${s.sedan.slice(0, 4)}` : 'Agility i Hudiksvall'}</p>
       <h1>{s.slogan}</h1>
+      <p class="hjalte-etikett"><Ikon namn="tass" storlek={16} /> {s.sedan ? `Sedan ${s.sedan.slice(0, 4)}` : 'Agility i Hudiksvall'}</p>
       <p class="hjalte-text">Träning, kurser och tävlingar för alla agilityintresserade hundmänniskor i Hudiksvall.</p>
       <p class="knapprad">
         <a class="knapp" href="/trana-hos-oss/">Träna hos oss <Ikon namn="pil" storlek={18} /></a>
