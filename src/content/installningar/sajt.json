@@ -8,8 +8,14 @@
   "startbildtext": "Agilityplanen bakom Hälsinge Smådjursklinik",
   "epost": "sagikhudiksvall@gmail.com",
   "telefon": [
-    { "namn": "Mirja", "nummer": "070-375 06 06" },
-    { "namn": "Rosemarie", "nummer": "070-203 50 58" }
+    {
+      "namn": "Mirja",
+      "nummer": "070-375 06 06"
+    },
+    {
+      "namn": "Rosemarie",
+      "nummer": "070-203 50 58"
+    }
   ],
   "facebook": "",
   "instagram": "",
@@ -25,6 +31,12 @@
       "lank": "https://hudiksvallssmadjursklinik.se/",
       "logga": "",
       "text": "20 % rabatt på allt utom foder för dig som betalat träningsavgiften."
+    },
+    {
+      "namn": "Studiefrämjandet",
+      "lank": "https://www.studieframjandet.se/",
+      "logga": "",
+      "text": "Alla våra kurser genomförs i samarbete med Studiefrämjandet."
     }
   ]
 }
