@@ -5,8 +5,8 @@ Du behöver inte kunna någon kod. Allt görs i ett vanligt formulär i webbläs
 ## Logga in
 
 1. Gå till **https://sagikhudiksvall.netlify.app/admin** (spara gärna som bokmärke).
-2. Klicka **Logga in med GitHub** och logga in med ditt GitHub-konto.
-   Första gången behöver Johan ha bjudit in ditt konto, se längre ner.
+2. Logga in med din **e-post och ditt lösenord** (eller med Google om du valt det).
+   Första gången får du ett mejl med en inbjudan där du väljer lösenord. Glömt lösenordet? Klicka "Glömt lösenord" på inloggningssidan.
 
 Till vänster ser du fyra delar: **Kalender**, **Nyheter**, **Sidor** och **Inställningar**.
 
@@ -62,6 +62,6 @@ Under **Inställningar → Startsida och kontaktuppgifter** ändrar du:
 
 ## För Johan: bjuda in en redaktör
 
-1. Redaktören skapar ett gratis konto på https://github.com/signup.
-2. Gå till repot på GitHub → **Settings** → **Collaborators** → **Add people** och lägg till kontot.
-3. Redaktören accepterar inbjudan (kommer via e-post) och kan sedan logga in på /admin.
+1. Logga in på DecapBridge och öppna webbplatsen.
+2. Gå till **Manage collaborators** och skriv in redaktörens e-postadress.
+3. Redaktören får ett mejl, väljer lösenord (eller Google) och kan sedan logga in på /admin.
