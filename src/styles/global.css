@@ -108,7 +108,7 @@ figcaption { text-align: center; color: var(--text-svag); font-size: .92rem; mar
 
 /* ---------- Startsida ---------- */
 .hjalte { position: relative; min-height: clamp(420px, 62vh, 600px); display: flex; align-items: flex-end; color: #fff;
-  background: linear-gradient(180deg, rgb(63 29 46 / .05) 0%, rgb(63 29 46 / .25) 45%, rgb(63 29 46 / .78) 100%), var(--bild, linear-gradient(var(--rosa), var(--rosa-mork))) center / cover no-repeat; }
+  background: linear-gradient(180deg, rgb(63 29 46 / 0) 0%, rgb(63 29 46 / .18) 40%, rgb(63 29 46 / .72) 100%), linear-gradient(90deg, rgb(63 29 46 / .35), rgb(63 29 46 / 0) 60%), var(--bild, linear-gradient(var(--rosa), var(--rosa-mork))) center 60% / cover no-repeat; }
 .hjalte-inre { padding-top: 4rem; padding-bottom: clamp(5rem, 9vw, 6.5rem); }
 .hjalte h1 { color: #fff; font-style: italic; max-width: 760px; text-shadow: 0 2px 20px rgb(0 0 0 / .25); }
 .hjalte-etikett { display: inline-flex; align-items: center; gap: .4rem; margin: 0 0 1rem; padding: .3rem .8rem; border-radius: 999px; background: rgb(255 255 255 / .18); backdrop-filter: blur(6px); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }

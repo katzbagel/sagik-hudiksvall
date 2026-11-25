@@ -3,6 +3,8 @@ title: Träna hos oss
 menytext: Träna hos oss
 ingress: Så blir du träningsmedlem och kommer igång på planen.
 ordning: 2
+bild: /bilder/traningsplanen.jpg
+bildtext: Träningsplanen bakom Hälsinge Smådjursklinik
 ---
 
 ## Innan du börjar
