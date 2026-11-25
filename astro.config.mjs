@@ -4,6 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 // Byt "site" till den riktiga adressen när domänen är klar.
 export default defineConfig({
-  site: 'https://sagik-hudiksvall.katzbagel.workers.dev',
+  site: 'https://sagikhudiksvall.se',
   integrations: [sitemap()],
 });

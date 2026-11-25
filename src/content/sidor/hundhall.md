@@ -11,7 +11,7 @@ Våra kurser, både grundkurser och coachgrupper, hittar du i [Studiefrämjandet
 
 ## Boka hallen
 
-Boka enklast via knappen **Boka hallen** högst upp på sidan. Har du frågor, kontakta oss på [sagikhudiksvall@gmail.com](mailto:sagikhudiksvall@gmail.com), eller ring Mirja 070-375 06 06 eller Rosemarie 070-203 50 58.
+Boka enklast via knappen **Boka hallen** högst upp på sidan. Har du frågor, kontakta oss på [info@sagikhudiksvall.se](mailto:info@sagikhudiksvall.se), eller ring Mirja 070-375 06 06 eller Rosemarie 070-203 50 58.
 
 | Tid | Pris |
 |---|---|

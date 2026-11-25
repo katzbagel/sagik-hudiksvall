@@ -5,7 +5,7 @@ ingress: Hör gärna av dig till oss!
 ordning: 5
 ---
 
-Har du frågor om träning, kurser eller hallen? Mejla oss på [sagikhudiksvall@gmail.com](mailto:sagikhudiksvall@gmail.com).
+Har du frågor om träning, kurser eller hallen? Mejla oss på [info@sagikhudiksvall.se](mailto:info@sagikhudiksvall.se).
 
 Vi finns också på Facebook och Instagram som **SAGIK Hudiksvall**.
 

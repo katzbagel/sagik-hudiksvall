@@ -27,7 +27,7 @@ Som träningsmedlem får du **20 % rabatt på allt utom foder** hos [Hälsinge S
 - **Swish:** 123 528 80 55
 - **Clearing:** 8270-1, **konto:** 147 725 16-3
 
-Skriv ditt namn på betalningen. Mejla sedan [sagikhudiksvall@gmail.com](mailto:sagikhudiksvall@gmail.com) med namn, adress, telefon, e-post och personnummer.
+Skriv ditt namn på betalningen. Mejla sedan [info@sagikhudiksvall.se](mailto:info@sagikhudiksvall.se) med namn, adress, telefon, e-post och personnummer.
 
 ## Var tränar vi?
 

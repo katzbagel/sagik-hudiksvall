@@ -26,7 +26,7 @@ Sajten byggs och publiceras automatiskt av Cloudflare vid varje ändring i `main
 
 1. **Cloudflare → Workers & Pages → Create → Import a repository**, välj `sagik-hudiksvall`.
 2. Projektnamn `sagik-hudiksvall`, build command `npm run build`, deploy command `npx wrangler deploy`. Node-version styrs av `.node-version`.
-3. Adressen blir `https://sagik-hudiksvall.katzbagel.workers.dev`, som står i `astro.config.mjs` och `public/admin/config.yml`. Byter ni adress, ändra de två filerna.
+3. Adressen blir `https://sagikhudiksvall.se`, som står i `astro.config.mjs` och `public/admin/config.yml`. Byter ni adress, ändra de två filerna.
 
 Gamla WordPress-adresser skickas vidare via `public/_redirects`.
 
@@ -34,7 +34,7 @@ Gamla WordPress-adresser skickas vidare via `public/_redirects`.
 
 Redaktörer loggar in med e-post och lösenord (eller Google) via [DecapBridge](https://decapbridge-web.pages.dev).
 
-1. Skapa konto på DecapBridge och välj **Add site**: GitHub, repo `katzbagel/sagik-hudiksvall`, en fine-grained GitHub-token med **Contents: Read and write** för bara det här repot, och login URL `https://sagik-hudiksvall.katzbagel.workers.dev/admin/index.html`.
+1. Skapa konto på DecapBridge och välj **Add site**: GitHub, repo `katzbagel/sagik-hudiksvall`, en fine-grained GitHub-token med **Contents: Read and write** för bara det här repot, och login URL `https://sagikhudiksvall.se/admin/index.html`.
 2. Kopiera `backend:`-delen från den genererade config.yml till `public/admin/config.yml`.
 3. Bjud in redaktörer under **Manage collaborators**.
 

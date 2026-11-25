@@ -27,8 +27,8 @@ auth:
 local_backend: true
 
 locale: sv
-site_url: https://sagik-hudiksvall.katzbagel.workers.dev
-display_url: https://sagik-hudiksvall.katzbagel.workers.dev
+site_url: https://sagikhudiksvall.se
+display_url: https://sagikhudiksvall.se
 logo_url: /favicon.svg
 
 media_folder: public/bilder/uppladdat

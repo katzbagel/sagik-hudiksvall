@@ -31,7 +31,7 @@ För ekipage som klarar alla hinder och vill träna på tävlingsliknande banor.
 
 ## Anmälan
 
-Mejla [sagikhudiksvall@gmail.com](mailto:sagikhudiksvall@gmail.com) med namn, uppgifter om hunden, adress, personnummer, telefon och e-post.
+Mejla [info@sagikhudiksvall.se](mailto:info@sagikhudiksvall.se) med namn, uppgifter om hunden, adress, personnummer, telefon och e-post.
 
 **Betalning:** Bankgiro 5110-1129, Swish 123 528 80 55 eller clearing 8270-1, konto 147 725 16-3.
 
