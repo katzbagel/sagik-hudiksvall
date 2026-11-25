@@ -4,7 +4,7 @@ Du behöver inte kunna någon kod. Allt görs i ett vanligt formulär i webbläs
 
 ## Logga in
 
-1. Gå till **https://sagik-hudiksvall.pages.dev/admin** (spara gärna som bokmärke).
+1. Gå till **https://sagik-hudiksvall.katzbagel.workers.dev/admin** (spara gärna som bokmärke).
 2. Logga in med din **e-post och ditt lösenord** (eller med Google om du valt det).
    Första gången får du ett mejl med en inbjudan där du väljer lösenord. Glömt lösenordet? Klicka "Glömt lösenord" på inloggningssidan.
 

@@ -14,8 +14,8 @@ backend:
 local_backend: true
 
 locale: sv
-site_url: https://sagik-hudiksvall.pages.dev
-display_url: https://sagik-hudiksvall.pages.dev
+site_url: https://sagik-hudiksvall.katzbagel.workers.dev
+display_url: https://sagik-hudiksvall.katzbagel.workers.dev
 logo_url: /favicon.svg
 
 media_folder: public/bilder/uppladdat
