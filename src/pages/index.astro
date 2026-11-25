@@ -18,6 +18,7 @@ const nytt = (await nyheter()).slice(0, 4);
       <p class="knapprad">
         <a class="knapp" href="/trana-hos-oss/">Träna hos oss <Ikon namn="pil" storlek={18} /></a>
         <a class="knapp vit" href="/kalender/"><Ikon namn="kalender" storlek={18} /> Kalender</a>
+        {s.bokningslank && <a class="knapp vit" href={s.bokningslank}><Ikon namn="hus" storlek={18} /> Boka hallen</a>}
       </p>
     </div>
     {s.startbildtext && <p class="hjalte-bildtext">{s.startbildtext}</p>}

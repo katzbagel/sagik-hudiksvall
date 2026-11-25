@@ -74,6 +74,7 @@ main { flex: 1; padding-bottom: 4rem; }
 .sidtitel h1 { font-style: italic; }
 .ingress { color: var(--text-svag); font-size: 1.15rem; margin: 0 auto; max-width: 620px; }
 .sidtitel .meta { margin-bottom: .6rem; }
+.sidtitel-knapp { margin: 1.4rem 0 0; }
 
 /* Vitt innehållskort som lägger sig över bandet */
 .kortyta { background: var(--kort); border-radius: var(--radie); box-shadow: var(--skugga); padding: clamp(1.4rem, 4vw, 3rem); margin-top: -3rem; position: relative; }

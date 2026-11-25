@@ -5,15 +5,13 @@ ingress: Vår hundhall på Baldra 10 i Hudiksvall, 14 × 22 meter med konstgräs
 ordning: 3
 ---
 
-> **På gång:** En bokningssida för hallen är under uppbyggnad. Länk kommer!
-
 ## Kurser
 
 Våra kurser, både grundkurser och coachgrupper, hittar du i [Studiefrämjandets kurssök](https://www.studieframjandet.se/kurssok/?q=%23sagikhudiksvall).
 
 ## Boka hallen
 
-Kontakta oss på [sagikhudiksvall@gmail.com](mailto:sagikhudiksvall@gmail.com), eller ring Mirja 070-375 06 06 eller Rosemarie 070-203 50 58.
+Boka enklast via knappen **Boka hallen** högst upp på sidan. Har du frågor, kontakta oss på [sagikhudiksvall@gmail.com](mailto:sagikhudiksvall@gmail.com), eller ring Mirja 070-375 06 06 eller Rosemarie 070-203 50 58.
 
 | Tid | Pris |
 |---|---|

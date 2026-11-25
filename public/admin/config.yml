@@ -121,6 +121,7 @@ collections:
           - { label: Länk för meddelandet, name: meddelandelank, widget: string, required: false, hint: 'T.ex. /trana-hos-oss/' }
           - { label: Stor bild på startsidan, name: startbild, widget: image, required: false }
           - { label: Bildtext till startbilden, name: startbildtext, widget: string, required: false }
+          - { label: Länk till bokning av hallen (BokaMera), name: bokningslank, widget: string, required: false, hint: 'Visas som knappen "Boka hallen". Lämna tomt för att dölja.' }
           - { label: E-post, name: epost, widget: string }
           - label: Telefonnummer
             name: telefon

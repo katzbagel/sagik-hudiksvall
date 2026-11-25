@@ -7,5 +7,6 @@ const { titel, ingress, meta } = Astro.props;
     {meta && <p class="meta">{meta}</p>}
     <h1>{titel}</h1>
     {ingress && <p class="ingress">{ingress}</p>}
+    <slot />
   </div>
 </header>

@@ -2,7 +2,8 @@
 import { render } from 'astro:content';
 import Bas from '../layouts/Bas.astro';
 import Sidtitel from '../components/Sidtitel.astro';
-import { menySidor } from '../lib/data';
+import Ikon from '../components/Ikon.astro';
+import { menySidor, sajt } from '../lib/data';
 
 export async function getStaticPaths() {
   const sidor = await menySidor();
@@ -10,9 +11,13 @@ export async function getStaticPaths() {
 }
 const { sida } = Astro.props;
 const { Content } = await render(sida);
+const s = await sajt();
+const bokning = sida.id === 'hundhall' ? s.bokningslank : undefined;
 ---
 <Bas titel={sida.data.title} beskrivning={sida.data.ingress}>
-  <Sidtitel titel={sida.data.title} ingress={sida.data.ingress} />
+  <Sidtitel titel={sida.data.title} ingress={sida.data.ingress}>
+    {bokning && <p class="sidtitel-knapp"><a class="knapp" href={bokning}><Ikon namn="kalender" storlek={18} /> Boka hallen</a></p>}
+  </Sidtitel>
   <div class="inre">
     <article class="prosa kortyta">
       {sida.data.bild && (

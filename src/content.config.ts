@@ -53,6 +53,7 @@ const installningar = defineCollection({
     meddelandelank: z.string().optional(),
     startbild: z.string().optional(),
     startbildtext: z.string().optional(),
+    bokningslank: z.string().optional(),
     epost: z.string(),
     telefon: z.array(z.object({ namn: z.string(), nummer: z.string() })).default([]),
     facebook: z.string().optional(),
