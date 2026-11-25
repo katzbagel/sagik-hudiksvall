@@ -1,0 +1,23 @@
+---
+import { render } from 'astro:content';
+import Bas from '../../layouts/Bas.astro';
+import { nyheter } from '../../lib/data';
+import { datumMedAr } from '../../lib/datum';
+
+export async function getStaticPaths() {
+  return (await nyheter()).map((n) => ({ params: { id: n.id }, props: { n } }));
+}
+const { n } = Astro.props;
+const { Content } = await render(n);
+---
+<Bas titel={n.data.title} beskrivning={n.data.sammanfattning}>
+  <div class="sidtitel">
+    <p class="meta">{datumMedAr(n.data.datum)}</p>
+    <h1>{n.data.title}</h1>
+  </div>
+  <div class="prosa">
+    {n.data.bild && <figure class="sidbild"><img src={n.data.bild} alt="" /></figure>}
+    <Content />
+    <p><a href="/nyheter/">← Alla nyheter</a></p>
+  </div>
+</Bas>

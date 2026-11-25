@@ -1,0 +1,9 @@
+body { font-family: 'Lato', sans-serif; color: #4a4448; line-height: 1.65; padding: 1rem 2rem; }
+h1, h2, h3 { font-family: 'Lora', serif; font-weight: 400; color: #5a5257; }
+h1 { font-style: italic; }
+a { color: #b7446a; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border-bottom: 1px solid #e6dadd; padding: .5rem; text-align: left; }
+th { background: #fbeef2; }
+blockquote { background: #fbeef2; border-left: 4px solid #e59aae; margin: 1rem 0; padding: .8rem 1rem; }
+img { max-width: 100%; }

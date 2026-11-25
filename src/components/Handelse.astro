@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { dag, manad, intervall, iso } from '../lib/datum';
+
+interface Props { h: CollectionEntry<'kalender'>; visaText?: boolean }
+const { h, visaText = true } = Astro.props;
+const { Content } = await render(h);
+const d = h.data;
+---
+<li class="handelse" id={h.id} data-slut={iso(d.slutdatum ?? d.datum)}>
+  <div class="datumbricka" aria-hidden="true"><span class="d">{dag(d.datum)}</span><span class="m">{manad(d.datum)}</span></div>
+  <div>
+    <h3><span class={`tagg tagg-${d.typ}`}>{d.typ}</span>{d.title}</h3>
+    <p class="info">
+      {intervall(d.datum, d.slutdatum)}{d.tid && ` · ${d.tid}`}{d.plats && ` · ${d.plats}`}
+    </p>
+    {visaText && <div class="beskr"><Content /></div>}
+    {d.anmalan && <p><a href={d.anmalan.includes('@') && !d.anmalan.startsWith('http') ? `mailto:${d.anmalan}` : d.anmalan}>Anmälan</a></p>}
+  </div>
+</li>

@@ -1,0 +1,52 @@
+---
+import Bas from '../layouts/Bas.astro';
+import Handelse from '../components/Handelse.astro';
+import { sajt, kommandeHandelser, nyheter } from '../lib/data';
+import { datumMedAr, idagISO } from '../lib/datum';
+
+const s = await sajt();
+const kommande = (await kommandeHandelser(idagISO())).slice(0, 4);
+const nytt = (await nyheter()).slice(0, 5);
+---
+<Bas>
+  <div class="sidtitel"><h1>{s.slogan}</h1></div>
+  {s.startbild && (
+    <figure class="hjalte sidbild">
+      <img src={s.startbild} alt={s.startbildtext ?? ''} width="1200" height="675" />
+      {s.startbildtext && <figcaption>{s.startbildtext}</figcaption>}
+    </figure>
+  )}
+  {s.meddelande && (
+    <p class="notis">
+      <span>{s.meddelande}</span>
+      {s.meddelandelank && <a href={s.meddelandelank}>Läs mer</a>}
+    </p>
+  )}
+  <div class="tvakol">
+    <section aria-labelledby="nytt">
+      <h2 id="nytt">Nyheter</h2>
+      {nytt.map((n) => (
+        <article class="nyhet">
+          <p class="meta">{datumMedAr(n.data.datum)}</p>
+          <h3><a href={`/nyheter/${n.id}/`}>{n.data.title}</a></h3>
+          {n.data.sammanfattning && <p>{n.data.sammanfattning}</p>}
+        </article>
+      ))}
+      <p><a href="/nyheter/">Alla nyheter</a></p>
+    </section>
+    <aside>
+      <div class="ruta">
+        <h2>Kommande</h2>
+        {kommande.length ? (
+          <ul class="handelser">{kommande.map((h) => <Handelse h={h} visaText={false} />)}</ul>
+        ) : <p>Inga inplanerade händelser just nu.</p>}
+        <p><a class="knapp" href="/kalender/">Hela kalendern</a></p>
+      </div>
+      <div class="ruta">
+        <h2>Vill du träna med oss?</h2>
+        <p>Träningsavgiften är 300 kr per person och år (500 kr per familj).</p>
+        <p><a class="knapp ljus" href="/trana-hos-oss/">Så kommer du igång</a></p>
+      </div>
+    </aside>
+  </div>
+</Bas>

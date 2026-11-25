@@ -1,0 +1,137 @@
+# Inställningar för redigeringsläget (Decap CMS) på /admin
+backend:
+  name: github
+  repo: katzbagel/sagik-hudiksvall
+  branch: main
+  commit_messages:
+    create: 'Skapa {{collection}} "{{slug}}"'
+    update: 'Uppdatera {{collection}} "{{slug}}"'
+    delete: 'Ta bort {{collection}} "{{slug}}"'
+    uploadMedia: 'Ladda upp "{{path}}"'
+    deleteMedia: 'Ta bort "{{path}}"'
+
+# För att testa på egen dator: kör "npx decap-server" och "npm run dev"
+local_backend: true
+
+locale: sv
+site_url: https://sagikhudiksvall.netlify.app
+display_url: https://sagikhudiksvall.netlify.app
+logo_url: /favicon.svg
+
+media_folder: public/bilder/uppladdat
+public_folder: /bilder/uppladdat
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: kalender
+    label: Kalender
+    label_singular: händelse
+    description: Träningar, kurser, tävlingar och annat som ska synas i kalendern. Passerade händelser döljs automatiskt.
+    folder: src/content/kalender
+    create: true
+    delete: true
+    slug: '{{datum}}-{{title}}'
+    identifier_field: title
+    summary: '{{datum}} · {{title}} ({{typ}})'
+    sortable_fields: ['datum', 'title', 'typ']
+    view_filters:
+      - { label: Träning, field: typ, pattern: Träning }
+      - { label: Kurs, field: typ, pattern: Kurs }
+      - { label: Tävling, field: typ, pattern: Tävling }
+      - { label: Hallen, field: typ, pattern: Hallen }
+    fields:
+      - { label: Rubrik, name: title, widget: string, hint: 'T.ex. "Grundkurs agility, tillfälle 1"' }
+      - { label: Typ, name: typ, widget: select, options: [Träning, Kurs, Tävling, Hallen, Övrigt], default: Träning }
+      - { label: Datum, name: datum, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, picker_utc: true }
+      - { label: Slutdatum (om det pågår flera dagar), name: slutdatum, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, picker_utc: true, required: false }
+      - { label: Tid, name: tid, widget: string, required: false, hint: 'T.ex. "18:00–19:30"' }
+      - { label: Plats, name: plats, widget: string, required: false, hint: 'T.ex. "Träningsplanen, Ullsättersvägen 8" eller "Hundhallen, Baldra 10"' }
+      - { label: Anmälan (e-post eller länk), name: anmalan, widget: string, required: false }
+      - { label: Beskrivning, name: body, widget: markdown, required: false, buttons: [bold, italic, link, bulleted-list], editor_components: [] }
+
+  - name: nyheter
+    label: Nyheter
+    label_singular: nyhet
+    description: Nyheter visas på startsidan, den senaste överst.
+    folder: src/content/nyheter
+    create: true
+    delete: true
+    slug: '{{year}}-{{month}}-{{day}}-{{title}}'
+    summary: '{{datum}} · {{title}}'
+    sortable_fields: ['datum', 'title']
+    fields:
+      - { label: Rubrik, name: title, widget: string }
+      - { label: Datum, name: datum, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, picker_utc: true }
+      - { label: Kort sammanfattning (syns på startsidan), name: sammanfattning, widget: text, required: false }
+      - { label: Bild, name: bild, widget: image, required: false }
+      - { label: Text, name: body, widget: markdown }
+
+  - name: sidor
+    label: Sidor
+    label_singular: sida
+    description: Webbplatsens fasta sidor i menyn.
+    editor: { preview: true }
+    files:
+      - &sida
+        label: Om oss
+        name: om
+        file: src/content/sidor/om.md
+        fields: &sidfalt
+          - { label: Rubrik, name: title, widget: string }
+          - { label: Text i menyn, name: menytext, widget: string }
+          - { label: Ingress (kort text under rubriken), name: ingress, widget: text, required: false }
+          - { label: Bild överst, name: bild, widget: image, required: false }
+          - { label: Bildtext, name: bildtext, widget: string, required: false }
+          - { label: Ordning i menyn, name: ordning, widget: number, value_type: int }
+          - { label: Innehåll, name: body, widget: markdown }
+      - { label: Träna hos oss, name: trana-hos-oss, file: src/content/sidor/trana-hos-oss.md, fields: *sidfalt }
+      - { label: Hundhall, name: hundhall, file: src/content/sidor/hundhall.md, fields: *sidfalt }
+      - { label: Träningar och tävlingar, name: traningar-tavlingar, file: src/content/sidor/traningar-tavlingar.md, fields: *sidfalt }
+      - { label: Kontakt, name: kontakt, file: src/content/sidor/kontakt.md, fields: *sidfalt }
+
+  - name: installningar
+    label: Inställningar
+    description: Startsidan, kontaktuppgifter, betalning och samarbetspartners.
+    editor: { preview: false }
+    files:
+      - label: Startsida och kontaktuppgifter
+        name: sajt
+        file: src/content/installningar/sajt.json
+        fields:
+          - { label: Klubbens namn, name: namn, widget: string }
+          - { label: Slogan (stor rubrik på startsidan), name: slogan, widget: string }
+          - { label: Årtal i sidfoten, name: sedan, widget: string, required: false }
+          - { label: Meddelande på startsidan, name: meddelande, widget: text, required: false, hint: 'Lämna tomt för att dölja.' }
+          - { label: Länk för meddelandet, name: meddelandelank, widget: string, required: false, hint: 'T.ex. /trana-hos-oss/' }
+          - { label: Stor bild på startsidan, name: startbild, widget: image, required: false }
+          - { label: Bildtext till startbilden, name: startbildtext, widget: string, required: false }
+          - { label: E-post, name: epost, widget: string }
+          - label: Telefonnummer
+            name: telefon
+            widget: list
+            summary: '{{namn}}: {{nummer}}'
+            fields:
+              - { label: Namn, name: namn, widget: string }
+              - { label: Nummer, name: nummer, widget: string }
+          - { label: Facebook-länk, name: facebook, widget: string, required: false }
+          - { label: Instagram-länk, name: instagram, widget: string, required: false }
+          - label: Betalning
+            name: betalning
+            widget: object
+            fields:
+              - { label: Bankgiro, name: bankgiro, widget: string, required: false }
+              - { label: Swish, name: swish, widget: string, required: false }
+              - { label: Clearingnummer, name: clearing, widget: string, required: false }
+              - { label: Kontonummer, name: konto, widget: string, required: false }
+          - label: Samarbetspartners och sponsorer
+            name: sponsorer
+            widget: list
+            summary: '{{namn}}'
+            fields:
+              - { label: Namn, name: namn, widget: string }
+              - { label: Länk, name: lank, widget: string, required: false }
+              - { label: Logga, name: logga, widget: image, required: false }
+              - { label: Text, name: text, widget: string, required: false }

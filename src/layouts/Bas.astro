@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import { sajt, menySidor } from '../lib/data';
+
+interface Props { titel?: string; beskrivning?: string }
+const { titel, beskrivning } = Astro.props;
+const s = await sajt();
+const meny = await menySidor();
+const sokvag = Astro.url.pathname;
+const fullTitel = titel ? `${titel} – ${s.namn}` : s.namn;
+const lankar = [
+  ...meny.map((m) => ({ href: `/${m.id}/`, text: m.data.menytext ?? m.data.title })),
+  { href: '/kalender/', text: 'Kalender' },
+];
+// Kalender före Kontakt
+const kontakt = lankar.findIndex((l) => l.href === '/kontakt/');
+if (kontakt > -1) lankar.push(lankar.splice(kontakt, 1)[0]);
+const ar = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitel}</title>
+    <meta name="description" content={beskrivning ?? s.slogan} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="text/calendar" title="Kalender" href="/kalender.ics" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <meta property="og:title" content={fullTitel} />
+    <meta property="og:description" content={beskrivning ?? s.slogan} />
+    {s.startbild && <meta property="og:image" content={new URL(s.startbild, Astro.site).href} />}
+  </head>
+  <body>
+    <div class="ram">
+      <header class="sidhuvud inre">
+        <a class="logga" href="/">{s.namn}</a>
+        <nav class="meny" id="meny" aria-label="Huvudmeny">
+          <button class="menyknapp" type="button" aria-expanded="false" aria-controls="menylista">☰ Meny</button>
+          <ul id="menylista">
+            {lankar.map((l) => (
+              <li><a href={l.href} aria-current={sokvag.startsWith(l.href) ? 'page' : undefined}>{l.text}</a></li>
+            ))}
+            <li><a href="/" aria-current={sokvag === '/' ? 'page' : undefined}>Start</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main class="inre"><slot /></main>
+      <footer class="sidfot">
+        <div class="inre">
+          <div class="kolumner">
+            <div>
+              <h2>Kontakt</h2>
+              <p><a href={`mailto:${s.epost}`}>{s.epost}</a></p>
+              {s.telefon.map((t) => <p>{t.namn}: <a href={`tel:${t.nummer.replace(/[^0-9+]/g, '')}`}>{t.nummer}</a></p>)}
+              {s.facebook && <p><a href={s.facebook}>Facebook</a></p>}
+              {s.instagram && <p><a href={s.instagram}>Instagram</a></p>}
+            </div>
+            <div>
+              <h2>Betalning</h2>
+              {s.betalning.bankgiro && <p>Bankgiro: {s.betalning.bankgiro}</p>}
+              {s.betalning.swish && <p>Swish: {s.betalning.swish}</p>}
+              {s.betalning.clearing && <p>Clearing: {s.betalning.clearing}, konto: {s.betalning.konto}</p>}
+            </div>
+            {s.sponsorer.length > 0 && (
+              <div>
+                <h2>Samarbeten</h2>
+                {s.sponsorer.map((sp) => (
+                  <div class="sponsor">
+                    {sp.logga && <img src={sp.logga} alt={sp.namn} loading="lazy" />}
+                    <p>{sp.lank ? <a href={sp.lank}>{sp.namn}</a> : sp.namn}</p>
+                    {sp.text && <p>{sp.text}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <p class="smatt">{s.namn} · {s.slogan}{s.sedan && ` · ${s.sedan}`} · © {ar}</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      // Dölj händelser som redan passerat (sidan kan vara byggd för några dagar sedan)
+      const idag = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm' }).format(new Date());
+      document.querySelectorAll<HTMLElement>('li.handelse[data-slut]').forEach((el) => {
+        if ((el.dataset.slut ?? '') < idag) el.hidden = true;
+      });
+      const nav = document.getElementById('meny');
+      const btn = nav?.querySelector('button');
+      btn?.addEventListener('click', () => {
+        const oppen = nav!.classList.toggle('oppen');
+        btn.setAttribute('aria-expanded', String(oppen));
+      });
+    </script>
+  </body>
+</html>

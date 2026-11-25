@@ -1,0 +1,30 @@
+{
+  "namn": "SAgiK Hudiksvall",
+  "slogan": "En aktivitetsgrupp under Svenska Agilityklubben",
+  "sedan": "2016–2026",
+  "meddelande": "Kom ihåg att betala träningsavgiften för 2026. Läs mer under Träna hos oss.",
+  "meddelandelank": "/trana-hos-oss/",
+  "startbild": "/bilder/startbild.svg",
+  "startbildtext": "Agilityplanen bakom Hälsinge Smådjursklinik",
+  "epost": "sagikhudiksvall@gmail.com",
+  "telefon": [
+    { "namn": "Mirja", "nummer": "070-375 06 06" },
+    { "namn": "Rosemarie", "nummer": "070-203 50 58" }
+  ],
+  "facebook": "",
+  "instagram": "",
+  "betalning": {
+    "bankgiro": "5110-1129",
+    "swish": "123 528 80 55",
+    "clearing": "8270-1",
+    "konto": "147 725 16-3"
+  },
+  "sponsorer": [
+    {
+      "namn": "Hälsinge Smådjursklinik",
+      "lank": "https://hudiksvallssmadjursklinik.se/",
+      "logga": "",
+      "text": "20 % rabatt på allt utom foder för dig som betalat träningsavgiften."
+    }
+  ]
+}

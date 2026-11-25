@@ -1,0 +1,100 @@
+---
+import Bas from '../layouts/Bas.astro';
+import Handelse from '../components/Handelse.astro';
+import { allaHandelser } from '../lib/data';
+import { iso } from '../lib/datum';
+
+const alla = await allaHandelser();
+const data = alla.map((h) => ({
+  id: h.id,
+  titel: h.data.title,
+  typ: h.data.typ,
+  start: iso(h.data.datum),
+  slut: iso(h.data.slutdatum ?? h.data.datum),
+  tid: h.data.tid ?? '',
+}));
+const typer = ['Träning', 'Kurs', 'Tävling', 'Hallen', 'Övrigt'];
+---
+<Bas titel="Kalender" beskrivning="Träningar, kurser, tävlingar och händelser i hallen.">
+  <div class="sidtitel">
+    <h1>Kalender</h1>
+    <p class="ingress">Träningar, kurser, tävlingar och färdiga banor i hallen.</p>
+  </div>
+
+  <section aria-label="Månadsvy">
+    <div class="kalenderhuvud">
+      <button type="button" id="foreg" aria-label="Föregående månad">‹</button>
+      <h2 id="manadsnamn" aria-live="polite"></h2>
+      <button type="button" id="nasta" aria-label="Nästa månad">›</button>
+    </div>
+    <div class="manadsvy" id="manadsvy"></div>
+    <p style="margin-top:.8rem">{typer.map((t) => <span class={`tagg tagg-${t}`}>{t}</span>)}</p>
+  </section>
+
+  <section class="prosa" aria-labelledby="kommande">
+    <h2 id="kommande">Kommande</h2>
+    <ul class="handelser" id="lista">
+      {alla.map((h) => <Handelse h={h} />)}
+    </ul>
+    <p id="tomt" hidden>Inga inplanerade händelser just nu.</p>
+    <div class="ruta">
+      <h2>Kalendern i mobilen</h2>
+      <p>Prenumerera på kalendern så dyker alla nya datum upp automatiskt i din telefon eller dator.</p>
+      <p class="prenumerera">
+        <a class="knapp" id="webcal" href="/kalender.ics">Prenumerera</a>
+        <a class="knapp ljus" href="/kalender.ics" download>Ladda ner (.ics)</a>
+      </p>
+    </div>
+  </section>
+
+  <script is:inline type="application/json" id="kalenderdata" set:html={JSON.stringify(data)} />
+  <script>
+    type H = { id: string; titel: string; typ: string; start: string; slut: string; tid: string };
+    const data: H[] = JSON.parse(document.getElementById('kalenderdata')!.textContent || '[]');
+    const idag = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm' }).format(new Date());
+
+    // Dölj passerade händelser i listan
+    let synliga = 0;
+    for (const h of data) {
+      const el = document.getElementById(h.id);
+      if (!el) continue;
+      if (h.slut < idag) el.hidden = true; else synliga++;
+    }
+    if (!synliga) document.getElementById('tomt')!.hidden = false;
+
+    // Prenumerationslänk (webcal://)
+    const wc = document.getElementById('webcal') as HTMLAnchorElement;
+    wc.href = `webcal://${location.host}/kalender.ics`;
+
+    const vy = document.getElementById('manadsvy')!;
+    const rubrik = document.getElementById('manadsnamn')!;
+    let ar = Number(idag.slice(0, 4));
+    let man = Number(idag.slice(5, 7)) - 1;
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const isoDag = (d: Date) => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
+    const vd = ['mån', 'tis', 'ons', 'tor', 'fre', 'lör', 'sön'];
+
+    function rita() {
+      const forsta = new Date(Date.UTC(ar, man, 1));
+      rubrik.textContent = new Intl.DateTimeFormat('sv-SE', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(forsta);
+      const forskjut = (forsta.getUTCDay() + 6) % 7; // måndag först
+      const start = new Date(Date.UTC(ar, man, 1 - forskjut));
+      let html = vd.map((d) => `<div class="vd">${d}</div>`).join('');
+      for (let i = 0; i < 42; i++) {
+        const d = new Date(start.getTime() + i * 86400000);
+        if (i === 35 && d.getUTCMonth() !== man) break;
+        const dagIso = isoDag(d);
+        const klass = ['ruta-dag', d.getUTCMonth() !== man ? 'annan' : '', dagIso === idag ? 'idag' : ''].join(' ');
+        const h = data.filter((x) => x.start <= dagIso && x.slut >= dagIso);
+        const poster = h
+          .map((x) => `<a class="h tagg-${x.typ}" href="#${x.id}" title="${x.titel.replace(/"/g, '&quot;')}">${x.tid && x.start === dagIso && /^\d/.test(x.tid) ? x.tid + ' ' : ''}${x.titel}</a>`)
+          .join('');
+        html += `<div class="${klass}"><span class="nr">${d.getUTCDate()}</span>${poster}</div>`;
+      }
+      vy.innerHTML = html;
+    }
+    document.getElementById('foreg')!.addEventListener('click', () => { man--; if (man < 0) { man = 11; ar--; } rita(); });
+    document.getElementById('nasta')!.addEventListener('click', () => { man++; if (man > 11) { man = 0; ar++; } rita(); });
+    rita();
+  </script>
+</Bas>
