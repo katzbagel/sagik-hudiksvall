@@ -1,18 +1,21 @@
 ---
 import Bas from '../../layouts/Bas.astro';
+import Sidtitel from '../../components/Sidtitel.astro';
 import { nyheter } from '../../lib/data';
 import { datumMedAr } from '../../lib/datum';
 const alla = await nyheter();
 ---
 <Bas titel="Nyheter">
-  <div class="sidtitel"><h1>Nyheter</h1></div>
-  <div class="prosa">
-    {alla.map((n) => (
-      <article class="nyhet">
-        <p class="meta">{datumMedAr(n.data.datum)}</p>
-        <h3><a href={`/nyheter/${n.id}/`}>{n.data.title}</a></h3>
-        {n.data.sammanfattning && <p>{n.data.sammanfattning}</p>}
-      </article>
-    ))}
+  <Sidtitel titel="Nyheter" ingress="Det senaste från klubben." />
+  <div class="inre">
+    <div class="prosa nyhetslista">
+      {alla.map((n) => (
+        <article class="nyhet">
+          <p class="meta">{datumMedAr(n.data.datum)}</p>
+          <h3><a href={`/nyheter/${n.id}/`}>{n.data.title}</a></h3>
+          {n.data.sammanfattning && <p>{n.data.sammanfattning}</p>}
+        </article>
+      ))}
+    </div>
   </div>
 </Bas>

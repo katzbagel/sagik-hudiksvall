@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Bas from '../../layouts/Bas.astro';
+import Sidtitel from '../../components/Sidtitel.astro';
 import { nyheter } from '../../lib/data';
 import { datumMedAr } from '../../lib/datum';
 
@@ -11,13 +12,12 @@ const { n } = Astro.props;
 const { Content } = await render(n);
 ---
 <Bas titel={n.data.title} beskrivning={n.data.sammanfattning}>
-  <div class="sidtitel">
-    <p class="meta">{datumMedAr(n.data.datum)}</p>
-    <h1>{n.data.title}</h1>
-  </div>
-  <div class="prosa">
-    {n.data.bild && <figure class="sidbild"><img src={n.data.bild} alt="" /></figure>}
-    <Content />
-    <p><a href="/nyheter/">← Alla nyheter</a></p>
+  <Sidtitel titel={n.data.title} meta={datumMedAr(n.data.datum)} />
+  <div class="inre">
+    <article class="prosa kortyta">
+      {n.data.bild && <figure class="sidbild"><img src={n.data.bild} alt="" /></figure>}
+      <Content />
+      <p><a class="textlank" href="/nyheter/">← Alla nyheter</a></p>
+    </article>
   </div>
 </Bas>

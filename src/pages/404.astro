@@ -1,7 +1,8 @@
 ---
 import Bas from '../layouts/Bas.astro';
+import Sidtitel from '../components/Sidtitel.astro';
 ---
 <Bas titel="Sidan finns inte">
-  <div class="sidtitel"><h1>Hoppsan, hunden sprang fel!</h1></div>
-  <div class="prosa" style="text-align:center"><p>Sidan du letar efter finns inte. <a href="/">Till startsidan</a></p></div>
+  <Sidtitel titel="Hoppsan, hunden sprang fel!" ingress="Sidan du letar efter finns inte." />
+  <div class="inre" style="text-align:center"><p><a class="knapp" href="/">Till startsidan</a></p></div>
 </Bas>

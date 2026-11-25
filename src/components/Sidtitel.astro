@@ -1,0 +1,11 @@
+---
+interface Props { titel: string; ingress?: string; meta?: string }
+const { titel, ingress, meta } = Astro.props;
+---
+<header class="sidtitel">
+  <div class="inre">
+    {meta && <p class="meta">{meta}</p>}
+    <h1>{titel}</h1>
+    {ingress && <p class="ingress">{ingress}</p>}
+  </div>
+</header>

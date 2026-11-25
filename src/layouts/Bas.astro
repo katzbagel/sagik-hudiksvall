@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Ikon from '../components/Ikon.astro';
 import { sajt, menySidor } from '../lib/data';
 
 interface Props { titel?: string; beskrivning?: string }
@@ -24,45 +25,63 @@ const ar = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitel}</title>
     <meta name="description" content={beskrivning ?? s.slogan} />
+    <meta name="theme-color" content="#b7446a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="text/calendar" title="Kalender" href="/kalender.ics" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
     <meta property="og:title" content={fullTitel} />
     <meta property="og:description" content={beskrivning ?? s.slogan} />
     {s.startbild && <meta property="og:image" content={new URL(s.startbild, Astro.site).href} />}
   </head>
   <body>
-    <div class="ram">
-      <header class="sidhuvud inre">
-        <a class="logga" href="/">{s.namn}</a>
+    <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
+    <header class="sidhuvud">
+      <div class="inre sidhuvud-rad">
+        <a class="logga" href="/">
+          <span class="logga-ikon"><Ikon namn="tass" storlek={22} /></span>
+          <span class="logga-text">{s.namn}<small>Agility i Hudiksvall</small></span>
+        </a>
         <nav class="meny" id="meny" aria-label="Huvudmeny">
-          <button class="menyknapp" type="button" aria-expanded="false" aria-controls="menylista">☰ Meny</button>
+          <button class="menyknapp" type="button" aria-expanded="false" aria-controls="menylista">
+            <span class="burgare" aria-hidden="true"></span><span>Meny</span>
+          </button>
           <ul id="menylista">
+            <li><a href="/" aria-current={sokvag === '/' ? 'page' : undefined}>Start</a></li>
             {lankar.map((l) => (
               <li><a href={l.href} aria-current={sokvag.startsWith(l.href) ? 'page' : undefined}>{l.text}</a></li>
             ))}
-            <li><a href="/" aria-current={sokvag === '/' ? 'page' : undefined}>Start</a></li>
           </ul>
         </nav>
-      </header>
-      <main class="inre"><slot /></main>
-      <footer class="sidfot">
+      </div>
+    </header>
+
+    <main id="innehall"><slot /></main>
+
+    <footer class="sidfot">
+      <svg class="vag" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 240 70 480 0 720 22 S 1200 60 1440 20 V60 H0 Z" fill="currentColor"/></svg>
+      <div class="sidfot-yta">
         <div class="inre">
           <div class="kolumner">
             <div>
+              <p class="sidfot-logga"><Ikon namn="tass" storlek={20} /> {s.namn}</p>
+              <p class="svag">{s.slogan}.</p>
+              <p class="sociala">
+                {s.facebook && <a href={s.facebook}>Facebook</a>}
+                {s.instagram && <a href={s.instagram}>Instagram</a>}
+              </p>
+            </div>
+            <div>
               <h2>Kontakt</h2>
-              <p><a href={`mailto:${s.epost}`}>{s.epost}</a></p>
-              {s.telefon.map((t) => <p>{t.namn}: <a href={`tel:${t.nummer.replace(/[^0-9+]/g, '')}`}>{t.nummer}</a></p>)}
-              {s.facebook && <p><a href={s.facebook}>Facebook</a></p>}
-              {s.instagram && <p><a href={s.instagram}>Instagram</a></p>}
+              <p><Ikon namn="post" storlek={16} /> <a href={`mailto:${s.epost}`}>{s.epost}</a></p>
+              {s.telefon.map((t) => <p><Ikon namn="telefon" storlek={16} /> {t.namn}: <a href={`tel:${t.nummer.replace(/[^0-9+]/g, '')}`}>{t.nummer}</a></p>)}
             </div>
             <div>
               <h2>Betalning</h2>
-              {s.betalning.bankgiro && <p>Bankgiro: {s.betalning.bankgiro}</p>}
-              {s.betalning.swish && <p>Swish: {s.betalning.swish}</p>}
-              {s.betalning.clearing && <p>Clearing: {s.betalning.clearing}, konto: {s.betalning.konto}</p>}
+              {s.betalning.bankgiro && <p>Bankgiro <strong>{s.betalning.bankgiro}</strong></p>}
+              {s.betalning.swish && <p>Swish <strong>{s.betalning.swish}</strong></p>}
+              {s.betalning.clearing && <p>Clearing <strong>{s.betalning.clearing}</strong>, konto <strong>{s.betalning.konto}</strong></p>}
             </div>
             {s.sponsorer.length > 0 && (
               <div>
@@ -70,17 +89,17 @@ const ar = new Date().getFullYear();
                 {s.sponsorer.map((sp) => (
                   <div class="sponsor">
                     {sp.logga && <img src={sp.logga} alt={sp.namn} loading="lazy" />}
-                    <p>{sp.lank ? <a href={sp.lank}>{sp.namn}</a> : sp.namn}</p>
-                    {sp.text && <p>{sp.text}</p>}
+                    <p>{sp.lank ? <a href={sp.lank}>{sp.namn}</a> : <strong>{sp.namn}</strong>}</p>
+                    {sp.text && <p class="svag">{sp.text}</p>}
                   </div>
                 ))}
               </div>
             )}
           </div>
-          <p class="smatt">{s.namn} · {s.slogan}{s.sedan && ` · ${s.sedan}`} · © {ar}</p>
+          <p class="smatt">© {ar} {s.namn}{s.sedan && ` · ${s.sedan}`}</p>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
     <script>
       // Dölj händelser som redan passerat (sidan kan vara byggd för några dagar sedan)
       const idag = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm' }).format(new Date());

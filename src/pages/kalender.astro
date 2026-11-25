@@ -1,6 +1,7 @@
 ---
 import Bas from '../layouts/Bas.astro';
 import Handelse from '../components/Handelse.astro';
+import Sidtitel from '../components/Sidtitel.astro';
 import { allaHandelser } from '../lib/data';
 import { iso } from '../lib/datum';
 
@@ -16,23 +17,20 @@ const data = alla.map((h) => ({
 const typer = ['Träning', 'Kurs', 'Tävling', 'Hallen', 'Övrigt'];
 ---
 <Bas titel="Kalender" beskrivning="Träningar, kurser, tävlingar och händelser i hallen.">
-  <div class="sidtitel">
-    <h1>Kalender</h1>
-    <p class="ingress">Träningar, kurser, tävlingar och färdiga banor i hallen.</p>
-  </div>
-
-  <section aria-label="Månadsvy">
+  <Sidtitel titel="Kalender" ingress="Träningar, kurser, tävlingar och färdiga banor i hallen." />
+  <div class="inre">
+  <section aria-label="Månadsvy" class="kortyta kalenderkort">
     <div class="kalenderhuvud">
       <button type="button" id="foreg" aria-label="Föregående månad">‹</button>
       <h2 id="manadsnamn" aria-live="polite"></h2>
       <button type="button" id="nasta" aria-label="Nästa månad">›</button>
     </div>
     <div class="manadsvy" id="manadsvy"></div>
-    <p style="margin-top:.8rem">{typer.map((t) => <span class={`tagg tagg-${t}`}>{t}</span>)}</p>
+    <p class="forklaring">{typer.map((t) => <span class={`tagg tagg-${t}`}>{t}</span>)}</p>
   </section>
 
   <section class="prosa" aria-labelledby="kommande">
-    <h2 id="kommande">Kommande</h2>
+    <h2 id="kommande" class="sektionsrubrik">Kommande</h2>
     <ul class="handelser" id="lista">
       {alla.map((h) => <Handelse h={h} />)}
     </ul>
@@ -46,6 +44,7 @@ const typer = ['Träning', 'Kurs', 'Tävling', 'Hallen', 'Övrigt'];
       </p>
     </div>
   </section>
+  </div>
 
   <script is:inline type="application/json" id="kalenderdata" set:html={JSON.stringify(data)} />
   <script>

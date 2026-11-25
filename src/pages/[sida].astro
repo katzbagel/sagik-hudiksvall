@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Bas from '../layouts/Bas.astro';
+import Sidtitel from '../components/Sidtitel.astro';
 import { menySidor } from '../lib/data';
 
 export async function getStaticPaths() {
@@ -11,17 +12,16 @@ const { sida } = Astro.props;
 const { Content } = await render(sida);
 ---
 <Bas titel={sida.data.title} beskrivning={sida.data.ingress}>
-  <div class="sidtitel">
-    <h1>{sida.data.title}</h1>
-    {sida.data.ingress && <p class="ingress">{sida.data.ingress}</p>}
-  </div>
-  <div class="prosa">
-    {sida.data.bild && (
-      <figure class="sidbild">
-        <img src={sida.data.bild} alt={sida.data.bildtext ?? ''} />
-        {sida.data.bildtext && <figcaption>{sida.data.bildtext}</figcaption>}
-      </figure>
-    )}
-    <div class="tabellrulla"><Content /></div>
+  <Sidtitel titel={sida.data.title} ingress={sida.data.ingress} />
+  <div class="inre">
+    <article class="prosa kortyta">
+      {sida.data.bild && (
+        <figure class="sidbild">
+          <img src={sida.data.bild} alt={sida.data.bildtext ?? ''} />
+          {sida.data.bildtext && <figcaption>{sida.data.bildtext}</figcaption>}
+        </figure>
+      )}
+      <div class="tabellrulla"><Content /></div>
+    </article>
   </div>
 </Bas>

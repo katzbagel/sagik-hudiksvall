@@ -1,52 +1,76 @@
 ---
 import Bas from '../layouts/Bas.astro';
 import Handelse from '../components/Handelse.astro';
+import Ikon from '../components/Ikon.astro';
 import { sajt, kommandeHandelser, nyheter } from '../lib/data';
 import { datumMedAr, idagISO } from '../lib/datum';
 
 const s = await sajt();
 const kommande = (await kommandeHandelser(idagISO())).slice(0, 4);
-const nytt = (await nyheter()).slice(0, 5);
+const nytt = (await nyheter()).slice(0, 4);
 ---
 <Bas>
-  <div class="sidtitel"><h1>{s.slogan}</h1></div>
-  {s.startbild && (
-    <figure class="hjalte sidbild">
-      <img src={s.startbild} alt={s.startbildtext ?? ''} width="1200" height="675" />
-      {s.startbildtext && <figcaption>{s.startbildtext}</figcaption>}
-    </figure>
-  )}
-  {s.meddelande && (
-    <p class="notis">
-      <span>{s.meddelande}</span>
-      {s.meddelandelank && <a href={s.meddelandelank}>Läs mer</a>}
-    </p>
-  )}
-  <div class="tvakol">
-    <section aria-labelledby="nytt">
-      <h2 id="nytt">Nyheter</h2>
-      {nytt.map((n) => (
-        <article class="nyhet">
-          <p class="meta">{datumMedAr(n.data.datum)}</p>
-          <h3><a href={`/nyheter/${n.id}/`}>{n.data.title}</a></h3>
-          {n.data.sammanfattning && <p>{n.data.sammanfattning}</p>}
-        </article>
-      ))}
-      <p><a href="/nyheter/">Alla nyheter</a></p>
+  <section class="hjalte" style={s.startbild ? `--bild: url('${s.startbild}')` : undefined}>
+    <div class="inre hjalte-inre">
+      <p class="hjalte-etikett"><Ikon namn="tass" storlek={16} /> {s.sedan ? `Sedan ${s.sedan.slice(0, 4)}` : 'Agility i Hudiksvall'}</p>
+      <h1>{s.slogan}</h1>
+      <p class="hjalte-text">Träning, kurser och tävlingar för alla agilityintresserade hundmänniskor i Hudiksvall.</p>
+      <p class="knapprad">
+        <a class="knapp" href="/trana-hos-oss/">Träna hos oss <Ikon namn="pil" storlek={18} /></a>
+        <a class="knapp vit" href="/kalender/"><Ikon namn="kalender" storlek={18} /> Kalender</a>
+      </p>
+    </div>
+    {s.startbildtext && <p class="hjalte-bildtext">{s.startbildtext}</p>}
+  </section>
+
+  <div class="inre">
+    {s.meddelande && (
+      <a class="notis" href={s.meddelandelank || undefined}>
+        <span class="notis-ikon"><Ikon namn="kort" storlek={20} /></span>
+        <span>{s.meddelande}</span>
+        {s.meddelandelank && <span class="notis-pil"><Ikon namn="pil" storlek={18} /></span>}
+      </a>
+    )}
+
+    <section class="genvagar" aria-label="Genvägar">
+      <a class="genvag" href="/trana-hos-oss/">
+        <span class="genvag-ikon"><Ikon namn="plats" storlek={24} /></span>
+        <strong>Träningsplanen</strong>
+        <span>Ullsättersvägen 8, bakom Hälsinge Smådjursklinik</span>
+      </a>
+      <a class="genvag" href="/hundhall/">
+        <span class="genvag-ikon"><Ikon namn="hus" storlek={24} /></span>
+        <strong>Hundhallen</strong>
+        <span>14 × 22 m inomhus på Baldra 10. Boka från 150 kr/tim</span>
+      </a>
+      <a class="genvag" href="/traningar-tavlingar/">
+        <span class="genvag-ikon"><Ikon namn="bok" storlek={24} /></span>
+        <strong>Kurser</strong>
+        <span>Baskurs och handlingskurs med Studiefrämjandet</span>
+      </a>
     </section>
-    <aside>
-      <div class="ruta">
-        <h2>Kommande</h2>
+
+    <div class="tvakol">
+      <section aria-labelledby="nytt">
+        <h2 id="nytt" class="sektionsrubrik">Nyheter</h2>
+        <div class="nyhetslista">
+          {nytt.map((n) => (
+            <article class="nyhet">
+              <p class="meta">{datumMedAr(n.data.datum)}</p>
+              <h3><a href={`/nyheter/${n.id}/`}>{n.data.title}</a></h3>
+              {n.data.sammanfattning && <p>{n.data.sammanfattning}</p>}
+            </article>
+          ))}
+        </div>
+        <p><a class="textlank" href="/nyheter/">Alla nyheter <Ikon namn="pil" storlek={16} /></a></p>
+      </section>
+      <aside class="ruta kommande">
+        <h2 class="sektionsrubrik">Kommande</h2>
         {kommande.length ? (
           <ul class="handelser">{kommande.map((h) => <Handelse h={h} visaText={false} />)}</ul>
         ) : <p>Inga inplanerade händelser just nu.</p>}
-        <p><a class="knapp" href="/kalender/">Hela kalendern</a></p>
-      </div>
-      <div class="ruta">
-        <h2>Vill du träna med oss?</h2>
-        <p>Träningsavgiften är 300 kr per person och år (500 kr per familj).</p>
-        <p><a class="knapp ljus" href="/trana-hos-oss/">Så kommer du igång</a></p>
-      </div>
-    </aside>
+        <p><a class="knapp" href="/kalender/">Hela kalendern <Ikon namn="pil" storlek={18} /></a></p>
+      </aside>
+    </div>
   </div>
 </Bas>
