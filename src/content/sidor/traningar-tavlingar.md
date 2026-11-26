@@ -2,6 +2,8 @@
 title: Träningar och tävlingar 2026
 menytext: Träningar/Tävlingar
 ingress: Kurser, träningsgrupper och tävlingar under 2026.
+seotitel: "Agilitykurser och tävlingar 2026"
+beskrivning: "Baskurs och handlingskurs i agility i Hudiksvall, i samarbete med Studiefrämjandet, samt information om tävlingar 2026."
 ordning: 4
 ---
 

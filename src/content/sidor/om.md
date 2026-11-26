@@ -2,6 +2,8 @@
 title: Om oss
 menytext: Om
 ingress: SAgiK Hudiksvall är en aktivitetsgrupp under Svenska Agilityklubben, startad 2016.
+seotitel: "Om oss – agilityklubb i Hälsingland"
+beskrivning: "SAgiK Hudiksvall är en aktivitetsgrupp under Svenska Agilityklubben som sedan 2016 samlar agility- och hundsportintresserade i Hudiksvall med omnejd."
 ordning: 1
 ---
 

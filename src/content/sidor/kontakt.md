@@ -2,6 +2,8 @@
 title: Kontakt
 menytext: Kontakt
 ingress: Hör gärna av dig till oss!
+seotitel: "Kontakta oss"
+beskrivning: "Kontakta SAgiK Hudiksvall om agilityträning, kurser eller att hyra hundhallen i Hudiksvall."
 ordning: 5
 ---
 

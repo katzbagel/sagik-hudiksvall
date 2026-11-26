@@ -9,12 +9,12 @@ const s = await sajt();
 const kommande = (await kommandeHandelser(idagISO())).slice(0, 4);
 const nytt = (await nyheter()).slice(0, 4);
 ---
-<Bas>
+<Bas titel="Agility i Hudiksvall" beskrivning="SAgiK Hudiksvall är en agilityklubb i Hudiksvall, Hälsingland. Träning, kurser och tävlingar i agility, och en hundhall att hyra." startsida>
   <section class="hjalte" style={s.startbild ? `--bild: url('${s.startbild}')` : undefined}>
     <div class="inre hjalte-inre">
       <h1>{s.slogan}</h1>
       <p class="hjalte-etikett"><Ikon namn="tass" storlek={16} /> {s.sedan ? `Sedan ${s.sedan.slice(0, 4)}` : 'Agility i Hudiksvall'}</p>
-      <p class="hjalte-text">Träning, kurser och tävlingar för alla agilityintresserade hundmänniskor i Hudiksvall.</p>
+      <p class="hjalte-text">Träning, kurser och tävlingar för alla agilityintresserade hundmänniskor i Hudiksvall och Hälsingland.</p>
       <p class="knapprad">
         <a class="knapp" href="/trana-hos-oss/">Träna hos oss <Ikon namn="pil" storlek={18} /></a>
         <a class="knapp vit" href="/kalender/"><Ikon namn="kalender" storlek={18} /> Kalender</a>

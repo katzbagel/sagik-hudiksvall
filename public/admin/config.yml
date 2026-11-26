@@ -96,6 +96,8 @@ collections:
           - { label: Rubrik, name: title, widget: string }
           - { label: Text i menyn, name: menytext, widget: string }
           - { label: Ingress (kort text under rubriken), name: ingress, widget: text, required: false }
+          - { label: Titel i Google (valfritt), name: seotitel, widget: string, required: false, hint: 'Visas som rubrik i sökresultat och webbläsarfliken. Lämna tomt för att använda sidans rubrik.' }
+          - { label: Beskrivning i Google (valfritt), name: beskrivning, widget: text, required: false, hint: 'En–två meningar som kan visas under rubriken i Googles sökresultat.' }
           - { label: Bild överst, name: bild, widget: image, required: false }
           - { label: Bildtext, name: bildtext, widget: string, required: false }
           - { label: Ordning i menyn, name: ordning, widget: number, value_type: int }

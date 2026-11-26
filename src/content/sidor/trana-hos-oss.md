@@ -2,6 +2,8 @@
 title: Träna hos oss
 menytext: Träna hos oss
 ingress: Så blir du träningsmedlem och kommer igång på planen.
+seotitel: "Träna agility i Hudiksvall"
+beskrivning: "Så blir du träningsmedlem hos SAgiK Hudiksvall. Träna agility på vår plan vid Hälsinge Smådjursklinik, 300 kr per år."
 ordning: 2
 bild: /bilder/traningsplanen.jpg
 bildtext: Träningsplanen bakom Hälsinge Smådjursklinik

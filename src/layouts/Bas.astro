@@ -3,12 +3,31 @@ import '../styles/global.css';
 import Ikon from '../components/Ikon.astro';
 import { sajt, menySidor } from '../lib/data';
 
-interface Props { titel?: string; beskrivning?: string }
-const { titel, beskrivning } = Astro.props;
+interface Props { titel?: string; beskrivning?: string; startsida?: boolean }
+const { titel, beskrivning, startsida = false } = Astro.props;
 const s = await sajt();
 const meny = await menySidor();
 const sokvag = Astro.url.pathname;
-const fullTitel = titel ? `${titel} – ${s.namn}` : s.namn;
+const fullTitel = !titel ? s.namn : startsida ? `${s.namn} – ${titel}` : `${titel} – ${s.namn}`;
+const kanonisk = new URL(Astro.url.pathname, Astro.site).href;
+// Strukturerad data så att Google förstår vilka vi är och var vi finns
+const organisation = startsida ? {
+  '@context': 'https://schema.org',
+  '@type': 'SportsOrganization',
+  name: s.namn,
+  description: beskrivning ?? s.slogan,
+  sport: 'Agility',
+  url: Astro.site?.href,
+  email: s.epost,
+  logo: new URL('/favicon.svg', Astro.site).href,
+  image: s.startbild ? new URL(s.startbild, Astro.site).href : undefined,
+  parentOrganization: { '@type': 'SportsOrganization', name: 'Svenska Agilityklubben', url: 'https://agilityklubben.se' },
+  location: [
+    { '@type': 'Place', name: 'Träningsplanen', address: { '@type': 'PostalAddress', streetAddress: 'Ullsättersvägen 8', postalCode: '824 34', addressLocality: 'Hudiksvall', addressRegion: 'Gävleborgs län', addressCountry: 'SE' } },
+    { '@type': 'Place', name: 'Hundhallen', address: { '@type': 'PostalAddress', streetAddress: 'Baldra 10', addressLocality: 'Hudiksvall', addressRegion: 'Gävleborgs län', addressCountry: 'SE' } },
+  ],
+  sameAs: [s.facebook, s.instagram].filter(Boolean),
+} : null;
 const lankar = [
   ...meny.map((m) => ({ href: `/${m.id}/`, text: m.data.menytext ?? m.data.title })),
   { href: '/kalender/', text: 'Kalender' },
@@ -31,9 +50,16 @@ const ar = new Date().getFullYear();
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet" />
+    <link rel="canonical" href={kanonisk} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="sv_SE" />
+    <meta property="og:site_name" content={s.namn} />
+    <meta property="og:url" content={kanonisk} />
     <meta property="og:title" content={fullTitel} />
     <meta property="og:description" content={beskrivning ?? s.slogan} />
     {s.startbild && <meta property="og:image" content={new URL(s.startbild, Astro.site).href} />}
+    {organisation && <script type="application/ld+json" set:html={JSON.stringify(organisation)} />}
   </head>
   <body>
     <a class="hoppa" href="#innehall">Hoppa till innehållet</a>

@@ -2,6 +2,8 @@
 title: Hundhall
 menytext: Hundhall
 ingress: Vår hundhall på Baldra 10 i Hudiksvall, 14 × 22 meter med konstgräs.
+seotitel: "Hundhall att hyra i Hudiksvall"
+beskrivning: "Hyr vår hundhall på Baldra 10 i Hudiksvall: 14 × 22 meter med konstgräs och utrustning för agility, rallylydnad och lydnad. Från 150 kr i timmen."
 ordning: 3
 ---
 

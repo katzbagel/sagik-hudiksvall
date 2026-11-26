@@ -8,6 +8,8 @@ const sidor = defineCollection({
     title: z.string(),
     menytext: z.string().optional(),
     ingress: z.string().optional(),
+    seotitel: z.string().optional(),
+    beskrivning: z.string().optional(),
     bild: z.string().optional(),
     bildtext: z.string().optional(),
     ordning: z.number().default(99),
